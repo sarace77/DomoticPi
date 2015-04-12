@@ -17,8 +17,8 @@ STATUS_ALL = "Off"
 
 TIME_R0_ON = 43200
 TIME_R1_ON = 43200
-TIME_R2_ON = 42120
-TIME_R3_ON = 42180
+TIME_R2_ON = 43200
+TIME_R3_ON = 43200
 
 TIME_R0_OFF = 64800
 TIME_R1_OFF = 64800
@@ -251,7 +251,7 @@ def getTimerStatus(number):
 def getUptime():
 	from datetime import timedelta
 	with open('/proc/uptime', 'r') as f:
-	    uptime_seconds = float(f.readline().split()[0])
+	    uptime_seconds = int(float(f.readline().split()[0]))
 	    uptime_string = str(timedelta(seconds = uptime_seconds))	    
 	return uptime_string
 
