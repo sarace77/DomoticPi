@@ -15,20 +15,20 @@ STATUS3 = "Off"
 
 STATUS_ALL = "Off"
 
-TIME_R0_ON = 42000
-TIME_R1_ON = 42060
+TIME_R0_ON = 43200
+TIME_R1_ON = 43200
 TIME_R2_ON = 42120
 TIME_R3_ON = 42180
 
-TIME_R0_OFF = 42010
-TIME_R1_OFF = 42070
-TIME_R2_OFF = 42130
-TIME_R3_OFF = 42190
+TIME_R0_OFF = 64800
+TIME_R1_OFF = 64800
+TIME_R2_OFF = 64800
+TIME_R3_OFF = 64800
 
-TIMER_R0_ENABLED = True
-TIMER_R1_ENABLED = True
-TIMER_R2_ENABLED = True
-TIMER_R3_ENABLED = True
+TIMER_R0_ENABLED = False
+TIMER_R1_ENABLED = False
+TIMER_R2_ENABLED = False
+TIMER_R3_ENABLED = False
 
 def setup():
 	GPIO.setFunction(RELAY0, GPIO.OUT)
@@ -140,69 +140,42 @@ def destroy():
 
 @webiopi.macro
 def disableTimer(number):
-	global TIME_R0_ON
-	global TIME_R1_ON
-	global TIME_R2_ON
-	global TIME_R3_ON
-	
-	global TIME_R0_OFF
-	global TIME_R1_OFF
-	global TIME_R2_OFF
-	global TIME_R3_OFF
-	
 	global TIMER_R0_ENABLED
 	global TIMER_R1_ENABLED
 	global TIMER_R2_ENABLED
 	global TIMER_R3_ENABLED
 
-	if (number == 0):
+	if (int(number) == 0):
 		TIMER_R0_ENABLED = False 
-		return "Ok"	
 
-	if (number == 1):
+	if (int(number) == 1):
 		TIMER_R1_ENABLED = False 
-		return "Ok"
 
-	if (number == 2):
+	if (int(number) == 2):
 		TIMER_R2_ENABLED = False 
-		return "Ok"
 	
-	if (number == 3):
+	if (int(number) == 3):
 		TIMER_R3_ENABLED = False 
-		return "Ok"
+	
 
 @webiopi.macro
 def enableTimer(number):
-	global TIME_R0_ON
-	global TIME_R1_ON
-	global TIME_R2_ON
-	global TIME_R3_ON
-	
-	global TIME_R0_OFF
-	global TIME_R1_OFF
-	global TIME_R2_OFF
-	global TIME_R3_OFF
-	
 	global TIMER_R0_ENABLED
 	global TIMER_R1_ENABLED
 	global TIMER_R2_ENABLED
 	global TIMER_R3_ENABLED
 
-	if ((number == 0) and (TIME_R0_ON < TIME_R0_OFF)):
+	if (int(number) == 0):
 		TIMER_R0_ENABLED = True 
-		return "Ok"	
 
-	if ((number == 1) and (TIME_R1_ON < TIME_R1_OFF)):
+	if (int(number) == 1):
 		TIMER_R1_ENABLED = True 
-		return "Ok"
 
-	if ((number == 2) and (TIME_R2_ON < TIME_R2_OFF)):
+	if (int(number) == 2):
 		TIMER_R2_ENABLED = True 
-		return "Ok"
 	
-	if ((number == 3) and (TIME_R3_ON < TIME_R3_OFF)):
+	if (int(number) == 3):
 		TIMER_R3_ENABLED = True 
-		return "Ok"
 
 
 @webiopi.macro
@@ -219,6 +192,60 @@ def getStatus(number):
 		return STATUS_ALL
 	return "Off"
 
+@webiopi.macro
+def getTimerOff(number):
+	if (number == "0"):
+		return TIME_R0_OFF
+	if (number == "1"):
+		return TIME_R1_OFF
+	if (number == "2"):
+		return TIME_R2_OFF
+	if (number == "3"):
+		return TIME_R3_OFF
+	return 0
+
+@webiopi.macro
+def getTimerOn(number):
+	if (number == "0"):
+		return TIME_R0_ON
+	if (number == "1"):
+		return TIME_R1_ON
+	if (number == "2"):
+		return TIME_R2_ON
+	if (number == "3"):
+		return TIME_R3_ON
+	return 0
+
+
+@webiopi.macro
+def getTimerStatus(number):
+	print (number)
+	if (number == "0"):
+		if (TIMER_R0_ENABLED):
+			return "On"
+		else :
+			return "Off"
+	
+	if (number == "1"):
+		if (TIMER_R1_ENABLED):
+			return "On"
+		else :
+			return "Off"
+	
+	if (number == "2"):
+		if (TIMER_R2_ENABLED):
+			return "On"
+		else :
+			return "Off"
+	
+	if (number == "3"):
+		if (TIMER_R3_ENABLED):
+			return "On"
+		else :
+			return "Off"
+	
+	return "Unknown"
+
 
 @webiopi.macro
 def getUptime():
@@ -232,49 +259,49 @@ def getUptime():
 @webiopi.macro
 def setTimer0Off(timer):
 	global TIME_R0_OFF
-	TIME_R0_OFF = timer
+	TIME_R0_OFF = int(timer)
 
 
 @webiopi.macro
 def setTimer1Off(timer):
 	global TIME_R1_OFF
-	TIME_R1_OFF = timer
+	TIME_R1_OFF = int(timer)
 
 
 @webiopi.macro
 def setTimer2Off(timer):
 	global TIME_R2_OFF
-	TIME_R2_OFF = timer
+	TIME_R2_OFF = int(timer)
 
 
 @webiopi.macro
 def setTimer3Off(timer):
 	global TIME_R3_OFF
-	TIME_R3_OFF = timer
+	TIME_R3_OFF = int(timer)
 
 
 @webiopi.macro
 def setTimer0On(timer):
 	global TIME_R0_ON
-	TIME_R0_ON = timer
+	TIME_R0_ON = int(timer)
 
 
 @webiopi.macro
 def setTimer1On(timer):
 	global TIME_R1_ON
-	TIME_R1_ON = timer
+	TIME_R1_ON = int(timer)
 
 
 @webiopi.macro
 def setTimer2On(timer):
 	global TIME_R2_ON
-	TIME_R2_ON = timer
+	TIME_R2_ON = int(timer)
 
 
 @webiopi.macro
 def setTimer3On(timer):
 	global TIME_R3_ON
-	TIME_R3_ON = timer
+	TIME_R3_ON = int(timer)
 
 
 @webiopi.macro

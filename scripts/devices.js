@@ -37,7 +37,7 @@ function toggleAll() {
 }	
 
 function toggleAllCallback(macroName, args, data) {
-		$("#bt_all_relay").text(data);
+	$("#bt_all_relay").text(data);
 	if (data == "Off") {
 		$("#bt_all_relay").attr("class", "offButton");
 	}
