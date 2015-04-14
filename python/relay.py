@@ -3,6 +3,70 @@ import datetime
 
 GPIO = webiopi.GPIO
 
+class timer:
+	def __init__(self, start = 0, stop = 0, isEnabled = False):
+		self.start = start;
+		self.stop = stop
+		self.isEnabled = isEnabled
+	def getStart(self):
+		hh = int(self.start/3600)
+		mm = int(self.start - hh * 3600)/60
+		ss = int(self.start - hh * 3600 - mm * 60)
+		return str(hh, ":", mm, " ", ss)
+	def getStop(self):
+		hh = int(self.stop/3600)
+		mm = int(self.stop - hh * 3600)/60
+		ss = int(self.stop - hh * 3600 - mm * 60)
+		return str(hh, ":", mm, " ", ss)
+	def fromString(self, timestring = 0, type = "start"):
+		sep_hm = -1
+		sep_ms = -1
+		while i < len(timestring):
+			if timestring[i] == ":":
+				sep_hm = i
+			elif timestring[i] == " ":
+				sep_ms = i
+			i = i + 1
+		if sep_hm != -1 and sep_ms != -1 :
+			hh = int(timestring[0:sep_hm])
+			mm = int(timestring[sep_hm + 1: sep_ms])
+			ss = int(timestring[sep_ms + 1: len(timestring)])
+			if type == "start" or type == "Start" :
+				self.start = hh * 3600 + mm * 60 + ss
+			elif type == "stop" or type == "Stop" :
+				self.stop = hh * 3600 + mm * 60 + ss
+		
+class dispositivo:
+	def __init__(self, name = "relay", pin = 0, status = True):
+		self.name = name
+		self.status = status
+		GPIO.setFunction(pin, GPIO.OUT)
+	def getName():
+		return name
+	def getStatus(self):
+		if self.status :
+			return "On"
+		return "Off"
+	def switchOn(self):
+		if not self.status:
+			GPIO.digitalWrite(RELAY0, GPIO.LOW)
+			self.status = True
+	def switchOff(self):		
+		if self.status:
+			GPIO.digitalWrite(RELAY0, GPIO.HIGH)
+			self.status = False
+	def toggle(self):
+		if self.status:
+			self.switchOff()
+		else:
+			self.switchOn()
+		
+
+relay0 = dispositivo("relay0", 22)		
+relay1 = dispositivo("relay1", 27)		
+relay2 = dispositivo("relay2", 17)		
+relay3 = dispositivo("relay3", 4)		
+
 RELAY0 = 22
 RELAY1 = 27
 RELAY2 = 17
@@ -31,31 +95,31 @@ TIMER_R2_ENABLED = False
 TIMER_R3_ENABLED = False
 
 def setup():
-	GPIO.setFunction(RELAY0, GPIO.OUT)
-	GPIO.setFunction(RELAY1, GPIO.OUT)
-	GPIO.setFunction(RELAY2, GPIO.OUT)
-	GPIO.setFunction(RELAY3, GPIO.OUT)
+#	GPIO.setFunction(RELAY0, GPIO.OUT)
+#	GPIO.setFunction(RELAY1, GPIO.OUT)
+#	GPIO.setFunction(RELAY2, GPIO.OUT)
+#	GPIO.setFunction(RELAY3, GPIO.OUT)
 
-	GPIO.digitalWrite(RELAY0, GPIO.HIGH)
-	GPIO.digitalWrite(RELAY1, GPIO.HIGH)
-	GPIO.digitalWrite(RELAY2, GPIO.HIGH)
-	GPIO.digitalWrite(RELAY3, GPIO.HIGH)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY0, GPIO.LOW)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY1, GPIO.LOW)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY2, GPIO.LOW)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY3, GPIO.LOW)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY3, GPIO.HIGH)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY2, GPIO.HIGH)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY1, GPIO.HIGH)
-	webiopi.sleep(0.1)	
-	GPIO.digitalWrite(RELAY0, GPIO.HIGH)
+#	GPIO.digitalWrite(RELAY0, GPIO.HIGH)
+#	GPIO.digitalWrite(RELAY1, GPIO.HIGH)
+#	GPIO.digitalWrite(RELAY2, GPIO.HIGH)
+#	GPIO.digitalWrite(RELAY3, GPIO.HIGH)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY0, GPIO.LOW)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY1, GPIO.LOW)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY2, GPIO.LOW)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY3, GPIO.LOW)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY3, GPIO.HIGH)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY2, GPIO.HIGH)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY1, GPIO.HIGH)
+#	webiopi.sleep(0.1)	
+#	GPIO.digitalWrite(RELAY0, GPIO.HIGH)
 
 def loop():
 	global STATUS0
