@@ -28,9 +28,9 @@ class Dispositivo:
         self.status = status
         GPIO.setFunction(self.pin, GPIO.OUT)
         if self.status:
-            switchOn()
+            self.switchOn()
         else :
-            switchOff()
+            self.switchOff()
     
     def switchOn(self):
         GPIO.digitalWrite(self.pin, GPIO.LOW)
@@ -42,9 +42,9 @@ class Dispositivo:
             
     def toggle(self):
         if self.status:
-            switchOff()
+            self.switchOff()
         else :
-            switchOn()
+            self.switchOn()
             
             
 def setup():
@@ -52,18 +52,18 @@ def setup():
     global timers_list
     global all_on
     
-    lista_dispostivi.append(Dispositivo("Relay 0"), 22, False)
-    lista_dispostivi.append(Dispositivo("Relay 1"), 27, False)
-    lista_dispostivi.append(Dispositivo("Relay 2"), 17, False)
-    lista_dispostivi.append(Dispositivo("Relay 3"), 4, False)
+    devices_list.append(Dispositivo("Relay 0", 22, False))
+    devices_list.append(Dispositivo("Relay 1", 27, False))
+    devices_list.append(Dispositivo("Relay 2", 17, False))
+    devices_list.append(Dispositivo("Relay 3", 4, False))
     
-    timers_list.append(DeviceTimer, 0, 43200, 64800)
-    timers_list.append(DeviceTimer, 1, 43200, 64800)
-    timers_list.append(DeviceTimer, 2, 43200, 64800)
-    timers_list.append(DeviceTimer, 3, 43200, 64800)
+    timers_list.append(DeviceTimer(0, 43200, 64800))
+    timers_list.append(DeviceTimer(1, 43200, 64800))
+    timers_list.append(DeviceTimer(2, 43200, 64800))
+    timers_list.append(DeviceTimer(3, 43200, 64800))
     
     for j in range(0,2):
-        for i in len(devices_list) :
+        for i in range(0,len(devices_list)) :
             devices_list[i].toggle()
             webiopi.sleep(0.1)
         webiopi.sleep(0.1)
@@ -82,16 +82,16 @@ def loop():
     if (all_on or all_off) and (all_on != all_off):
         if all_on:
             all_status = "On"
-            for i in len(devices_list) :
+            for i in range(0, len(devices_list)) :
                 if not devices_list[i].status:
                     devices_list[i].switchOn()
         else:
             all_status = "Off"
-            for i in len(devices_list) :
+            for i in range(0, len(devices_list)) :
                 if devices_list[i].status:
                     devices_list[i].switchOff()
     else:        
-        for i in len(timers_list):
+        for i in range(0, len(timers_list)) :
             if timers_list[i].index >= 0 and timers_list[i].index < len(devices_list):
                 if timers_list[i].enabled and now_s >= timers_list[i].start and now_s < timers_list[i].stop:
                     devices_list[timers_list[i].index].switchOn()
@@ -100,7 +100,7 @@ def loop():
             
 
 def destroy():
-    for i in len(devices_list) :
+    for i in range(0, len(devices_list)) :
         devices_list[i].switchOff()
         
 
@@ -187,7 +187,10 @@ def getTimerStatus(index):
     global timers_list
     i = int(index)
     if i >= 0 and i < len(timers_list):
-        return timers_list[i].status
+        if timers_list[i].enabled :
+            return "On"
+        else:
+            return "Off"
     return "Unknown"
 
 
@@ -233,9 +236,9 @@ def toggleRelay(index):
         if i >= 0 and i < len(devices_list):            
             devices_list[i].toggle()
             if manual_disable_timers:
-                for j in len(timers_list):
+                for j in range(0, len(timers_list)):
                     if timers_list[i].index == i:
-                        timers_list[i].enabled = false
+                        timers_list[i].enabled = False
                 
             
 
