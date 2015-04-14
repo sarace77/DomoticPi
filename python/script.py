@@ -4,6 +4,7 @@ import datetime
 GPIO = webiopi.GPIO
 
 devices_list = []
+sensors_list = []
 timers_list = []
 
 all_status = "Unknown"
@@ -20,8 +21,12 @@ class DeviceTimer:
         self.stop = stop
         self.enabled = enabled
 
+class SensorDevice:
+    def __init__(self):
+        self.meteo = webiopi.deviceInstance("bmp") 
 
-class Dispositivo:
+
+class SwitchDevice:
     def __init__(self, name="dispositivo", pin = 0, status = False):
         self.name = name
         self.pin = pin
@@ -49,18 +54,20 @@ class Dispositivo:
             
 def setup():
     global devices_list
+    global sensors_list
     global timers_list
-    global all_on
+
+    devices_list.append(SwitchDevice("Relay 0", 22, False))
+    devices_list.append(SwitchDevice("Relay 1", 27, False))
+    devices_list.append(SwitchDevice("Relay 2", 17, False))
+    devices_list.append(SwitchDevice("Relay 3", 4, False))
     
-    devices_list.append(Dispositivo("Relay 0", 22, False))
-    devices_list.append(Dispositivo("Relay 1", 27, False))
-    devices_list.append(Dispositivo("Relay 2", 17, False))
-    devices_list.append(Dispositivo("Relay 3", 4, False))
+    sensors_list.append(SensorDevice())        
     
     timers_list.append(DeviceTimer(0, 43200, 64800))
     timers_list.append(DeviceTimer(1, 43200, 64800))
     timers_list.append(DeviceTimer(2, 43200, 64800))
-    timers_list.append(DeviceTimer(3, 43200, 64800))
+    timers_list.append(DeviceTimer(3, 43200, 64800))   
     
     for j in range(0,2):
         for i in range(0,len(devices_list)) :
@@ -70,15 +77,25 @@ def setup():
 
 
 def loop():
-    global devices_list
-    global timers_list
-    
-    global all_status
-    global all_on
     global all_off
+    global all_on
+    global all_status
+    global devices_list
+    global sensors_list
+    global timers_list   
 
     all_status = "Unknown"
-    
+
+    now = datetime.datetime.now()
+    now_s = now.hour * 3600 + now.minute * 60 + now.second
+
+    pressure = []
+    temperature = []
+
+    for i in range(0, len(sensors_list)):
+        pressure.append(sensors_list[i].meteo.getHectoPascal())
+        temperature.append(sensors_list[i].meteo.getCelsius())
+        
     if (all_on or all_off) and (all_on != all_off):
         if all_on:
             all_status = "On"
@@ -90,12 +107,12 @@ def loop():
             for i in range(0, len(devices_list)) :
                 if devices_list[i].status:
                     devices_list[i].switchOff()
-    else:        
+    else:
         for i in range(0, len(timers_list)) :
             if timers_list[i].index >= 0 and timers_list[i].index < len(devices_list):
                 if timers_list[i].enabled and now_s >= timers_list[i].start and now_s < timers_list[i].stop:
                     devices_list[timers_list[i].index].switchOn()
-                elif timers_list[i].enabled and (now_s < timers_list[i].start and now_s >= timers_list[i].stop):
+                elif timers_list[i].enabled and (now_s < timers_list[i].start or now_s >= timers_list[i].stop):
                     devices_list[timers_list[i].index].switchOff()
             
 
@@ -134,13 +151,13 @@ def editTimer(id, dispositivo, start, stop, status):
     index_dispositivo = int(dispositivo)
     if index_timer >= 0 and index_timer < len(timers_list):
       if index_dispositivo >= 0 and index_dispositivo < len(devices_list):
-        devices_list[index_timer].start = int(start)
-        devices_list[index_timer].stop = int(stop)
+        timers_list[index_timer].index = index_dispositivo
+        timers_list[index_timer].start = int(start)
+        timers_list[index_timer].stop = int(stop)
         if status == "On" or status == "on" or status == "ON":
-            devices_list[index_timer].enabled = True
+            timers_list[index_timer].enabled = True
         elif status == "Off" or status == "off" or status == "OFF":
-            devices_list[index_timer].enabled = False
-
+            timers_list[index_timer].enabled = False
 
 @webiopi.macro
 def enableTimer(index):

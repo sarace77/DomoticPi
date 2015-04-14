@@ -3,7 +3,7 @@
  */
 
 webiopi().ready(updateUI);
-			
+
 function updateUI() {
 	webiopi().callMacro("getTimerOff","0",timer0OffCallback);
 	webiopi().callMacro("getTimerOff","1",timer1OffCallback);
@@ -173,10 +173,10 @@ function toggleTimer0() {
 		timerOff = hh * 3600 + mm * 60 + ss;	
 	}
 	if ($("#bt_timer0").text() == "On") {
-		enable = "False";
+		enable = "Off";
 	}		
 	else {
-		enable = "True";
+		enable = "On";
 	}
 	var args = new Array("0", "0", timerOn, timerOff, enable);
 	webiopi().callMacro("editTimer", args, []);
@@ -198,10 +198,10 @@ function toggleTimer1() {
 		timerOff = hh * 3600 + mm * 60 + ss;	
 	}
 	if ($("#bt_timer1").text() == "On") {
-		enable = "False";
+		enable = "Off";
 	}		
 	else {
-		enable = "True";
+		enable = "On";
 	}
 	var args = new Array("1", "1", timerOn, timerOff, enable);
 	webiopi().callMacro("editTimer", args, []);
@@ -223,10 +223,10 @@ function toggleTimer2() {
 		timerOff = hh * 3600 + mm * 60 + ss;	
 	}
 	if ($("#bt_timer2").text() == "On") {
-		enable = "False";
+		enable = "Off";
 	}		
 	else {
-		enable = "True";
+		enable = "On";
 	}
 	var args = new Array("2", "2", timerOn, timerOff, enable);
 	webiopi().callMacro("editTimer", args, []);
@@ -248,10 +248,10 @@ function toggleTimer3() {
 		timerOff = hh * 3600 + mm * 60 + ss;	
 	}
 	if ($("#bt_timer3").text() == "On") {
-		enable = "False";
+		enable = "Off";
 	}		
 	else {
-		enable = "True";
+		enable = "On";
 	}
 	var args = new Array("3", "3", timerOn, timerOff, enable);
 	webiopi().callMacro("editTimer", args, []);
