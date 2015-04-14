@@ -209,54 +209,6 @@ def removeTimer(index):
 
 
 @webiopi.macro
-def setTimer0Off(timer):
-    global timers_list
-    timers_list[0].stop = int(timer)
-
-
-@webiopi.macro
-def setTimer1Off(timer):
-    global timers_list
-    timers_list[1].stop = int(timer)
-
-
-@webiopi.macro
-def setTimer2Off(timer):
-    global timers_list
-    timers_list[2].stop = int(timer)
-
-
-@webiopi.macro
-def setTimer3Off(timer):
-    global timers_list
-    timers_list[3].stop = int(timer)
-
-
-@webiopi.macro
-def setTimer0On(timer):
-    global timers_list
-    timers_list[0].start = int(timer)
-
-
-@webiopi.macro
-def setTimer1On(timer):
-    global timers_list
-    timers_list[1].start = int(timer)
-
-
-@webiopi.macro
-def setTimer2On(timer):
-    global timers_list
-    timers_list[2].start = int(timer)
-
-
-@webiopi.macro
-def setTimer3On(timer):
-    global timers_list
-    timers_list[3].start = int(timer)
-
-
-@webiopi.macro
 def toggleRelay(index):
     global devices_list
     global timers_list

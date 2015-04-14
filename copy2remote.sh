@@ -4,13 +4,18 @@ SCP=`which scp`
 
 remoteBase='pi@'$1:
 
-prjDir=${remoteBase}./workspace/webiopi
-pyDir=${prjDir}/python
-webDir=${prjDir}/html
-cssDir=${webDir}/css
-jsDir=${webDir}/scripts
+localPyDir=python
+localWebDir=html
+localCssDir=${localWebDir}/css
+localjsDir=$localWebDir}/scripts
 
-$SCP *.html $webDir
-$SCP css/* $cssDir
-$SCP scripts/* $jsDir
-$SCP python/* $pyDir 
+prjDir=${remoteBase}./workspace/webiopi
+pyDir=${prjDir}/${localPyDir}
+webDir=${prjDir}/${localWebDir}
+cssDir=${webDir}/${localCssDir}
+jsDir=${webDir}/${localjsDir}
+
+$SCP ${localWebDir}/*.html $webDir
+$SCP ${localCssDir}/*.css $cssDir
+$SCP ${localjsDir}/*.js $jsDir
+$SCP ${localPyDir}/*.py $pyDir 
