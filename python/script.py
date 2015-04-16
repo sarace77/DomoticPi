@@ -1,7 +1,11 @@
 import webiopi
 import datetime
+import Adafruit_DHT
+import json
 
 GPIO = webiopi.GPIO
+
+
 
 devices_list = []
 sensors_list = []
@@ -14,6 +18,12 @@ all_off = False
 
 manual_disable_timers = True
 
+class ExtSensorDHT11:
+    def __init__(self, pin):
+        self.sensor = Adafruit_DHT.DHT11
+        self.pin = pin
+
+
 class DeviceTimer:
     def __init__(self, index = -1, start = 0, stop = 0, enabled = False):
         self.index = index
@@ -24,7 +34,6 @@ class DeviceTimer:
 class SensorDevice:
     def __init__(self):
         self.meteo = webiopi.deviceInstance("bmp") 
-
 
 class SwitchDevice:
     def __init__(self, name="dispositivo", pin = 0, status = False):
@@ -95,7 +104,7 @@ def loop():
     for i in range(0, len(sensors_list)):
         pressure.append(sensors_list[i].meteo.getHectoPascal())
         temperature.append(sensors_list[i].meteo.getCelsius())
-        
+
     if (all_on or all_off) and (all_on != all_off):
         if all_on:
             all_status = "On"
@@ -257,5 +266,14 @@ def toggleRelay(index):
                     if timers_list[i].index == i:
                         timers_list[i].enabled = False
                 
-            
-
+       
+                
+@webiopi.macro
+def getHumidity(pin):
+    hSensor = ExtSensorDHT11(int(pin))
+    humidity, temperature = Adafruit_DHT.read_retry(hSensor.sensor, hSensor.pin)
+    print (pin, humidity, temperature)
+    if humidity is not None:
+        return humidity
+    else:
+        return "None"
