@@ -23,39 +23,47 @@
 	</head>
 
 	<body>
-		<div>
-			<header>
-				<h1>Lista dei dispositivi</h1>
+		<div id="wrapper">
+			<header id="headerwrap">
+				<div id="header">
+					<h1>Lista dei dispositivi</h1>
+				</div>
 			</header>
 			<nav>
-				<div align="left">
-					<a href="index.html" class="menuButton">Home</a>
-					<a href="configurations.html" class="menuButton">Configurazioni</a>
-					<a href="devices.html" class="menuButton">Dispositivi</a>
-					<a href="sensors.html" class="menuButton">Sensori</a>
-					<a href="timers.html" class="menuButton">Timer</a>
+				<div id="navigationwrap">
+					<div id="navigation" align="center">
+						<a href="index.html" class="menuButton">Home</a>
+						<a href="configurations.html" class="menuButton">Configurazioni</a>
+						<a href="devices.html" class="menuButton">Dispositivi</a>
+						<a href="sensors.html" class="menuButton">Sensori</a>
+						<a href="timers.html" class="menuButton">Timer</a>
+					</div>
 				</div>
 			</nav>
 			
 			<hr/>
-			
-			<div align="left">
-				<h2> Dispositivi connessi: </h2>
-	        	<h3>Relay #0 <button id="bt_relay0" class="tristateButton" onclick="toggleRelay0()">Unkown</button><br/>
-    	    	Relay #1 <button id="bt_relay1" class="tristateButton" onclick="toggleRelay1()">Unkown</button><br/>
-        		Relay #2 <button id="bt_relay2" class="tristateButton" onclick="toggleRelay2()">Unkown</button><br/>
-       		 	Relay #3 <button id="bt_relay3" class="tristateButton" onclick="toggleRelay3()">Unkown</button></h3>
-			</div>
-			<div align="right">
-				<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggleAll()">Unkown</button> </h3>
+						
+			<div id="contentliquid">
+				<div id="contentwrap">
+					<div id="content">
+						<h2> Dispositivi connessi: </h2>
+	    		    	Relay #0 <button id="bt_relay0" class="tristateButton" onclick="toggleRelay0()">Unkown</button><br/>
+    	    			Relay #1 <button id="bt_relay1" class="tristateButton" onclick="toggleRelay1()">Unkown</button><br/>
+        				Relay #2 <button id="bt_relay2" class="tristateButton" onclick="toggleRelay2()">Unkown</button><br/>
+       		 			Relay #3 <button id="bt_relay3" class="tristateButton" onclick="toggleRelay3()">Unkown</button>
+						<div align="right">
+							<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggleAll()">Unkown</button> </h3>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<hr />
-
-			<footer>
-				<p>
+			
+			<footer id="footerwrap">
+				<div id="footer">
 					&copy; Copyright  by Antonio
-				</p>
+				</div>
 			</footer>
 		</div>
 	</body>

@@ -1,6 +1,83 @@
+@import url("reset.css");
+
 body {
-	background-color: #000000;
-	color: #E9E9E9;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    background-color: black;
+	color:#fff    
+}
+
+p {
+    padding: 10px;
+}
+
+#wrapper {
+    width: 100%;
+    min-width: 1080px;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+#headerwrap {
+    width: 100%;
+    float: left;
+    margin: 0 auto;
+}
+
+#header {
+    height: 75px;
+    background: #3366FF;
+    border-radius: 10px;
+    border: 1px solid #1f52eb;
+    margin: 5px;
+    text-align: center;
+}
+
+#navigationwrap {
+    width: 100%;
+    float: left;
+    margin: 0 auto;
+}
+
+#navigation {	
+    height: 40px;
+    background: #404040;
+    border-radius: 10px;
+    border: 1px solid #525252;
+    margin: 10px; 
+	text-align: center;
+}
+
+#contentliquid {
+    float: left;
+    width: 100%;
+}
+
+#contentwrap {
+    width: 100%;
+    float: left;
+}
+
+#content {
+    background: #000000;
+    border-radius: 10px;
+    border: 1px solid #000000;
+    margin: 5px;
+}
+
+#footerwrap {
+    width: 100%;
+    float: left;
+    margin: 0 auto;
+    clear: both;
+}
+
+#footer {
+    height: 40px;
+    background: #404040;
+    border-radius: 10px;
+    border: 1px solid #525252;
+    margin: 5px;
 }
 
 .onButton {

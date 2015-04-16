@@ -24,42 +24,47 @@
 	</head>
 
 	<body>
-		<div>
-			<header>
-				<h1>Benvenuti nella pagina principale di DomoticPi</h1>
+		<div id="wrapper">
+			<header id="headerwrap">
+				<div id="header">
+					<h1>Benvenuti nella pagina principale di DomoticPi</h1>
+				</div>
 			</header>
 			<nav>
-				<div align="left">
-					<a href="index.html" class="menuButton">Home</a>
-					<a href="configurations.html" class="menuButton">Configurazioni</a>
-					<a href="devices.html" class="menuButton">Dispositivi</a>
-					<a href="sensors.html" class="menuButton">Sensori</a>
-					<a href="timers.html" class="menuButton">Timer</a>
+				<div id="navigationwrap">
+					<div id="navigation" align="center">
+						<a href="index.html" class="menuButton">Home</a>
+						<a href="configurations.html" class="menuButton">Configurazioni</a>
+						<a href="devices.html" class="menuButton">Dispositivi</a>
+						<a href="sensors.html" class="menuButton">Sensori</a>
+						<a href="timers.html" class="menuButton">Timer</a>
+					</div>
 				</div>
 			</nav>
 			
 			<hr/>
 			
-			<div>
-				<h2>Riepilogo</h2>
-				<h3>Sistema acceso e funzionante da: <input readonly="readonly" id="bt_uptime" size="10"/> </h3>
-				<h3>Timer Attivi:
-					<ul>
-						<li>Timer 0 <button id="bt_timer0" class="tristateButton" >Unkown</button></li>
-						<li>Timer 1 <button id="bt_timer1" class="tristateButton" >Unkown</button></li>
-						<li>Timer 2 <button id="bt_timer2" class="tristateButton" >Unkown</button></li>
-						<li>Timer 3 <button id="bt_timer3" class="tristateButton" >Unkown</button></li>					
-					</ul>
-				</h3>
-
+			<div id="contentliquid">
+				<div id="contentwrap">
+					<div id="content">
+						<h2>Riepilogo</h2>
+						<h3>Sistema acceso e funzionante da: <input readonly="readonly" id="bt_uptime" size="10"/> </h3>
+						<ul>
+							<li>Timer 0 <button id="bt_timer0" class="tristateButton" >Unkown</button></li>
+							<li>Timer 1 <button id="bt_timer1" class="tristateButton" >Unkown</button></li>
+							<li>Timer 2 <button id="bt_timer2" class="tristateButton" >Unkown</button></li>
+							<li>Timer 3 <button id="bt_timer3" class="tristateButton" >Unkown</button></li>					
+						</ul>
+					</div>
+				</div>
 			</div>
 			
 			<hr />
 			
-			<footer>
-				<p>
+			<footer id="footerwrap">
+				<div id="footer">
 					&copy; Copyright  by Antonio
-				</p>
+				</div>
 			</footer>
 		</div>
 	</body>

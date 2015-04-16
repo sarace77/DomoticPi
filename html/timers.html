@@ -24,55 +24,63 @@
 	</head>
 
 	<body>
-		<div>
-			<header>
-				<h1>timers</h1>
+		<div id="wrapper">
+			<header id="headerwrap">
+				<div id="header" >
+					<h1>timers</h1>
+				</div>
 			</header>
 			<nav>
-				<div align="left">
-					<a href="index.html" class="menuButton">Home</a>
-					<a href="configurations.html" class="menuButton">Configurazioni</a>
-					<a href="devices.html" class="menuButton">Dispositivi</a>
-					<a href="sensors.html" class="menuButton">Sensori</a>
-					<a href="timers.html" class="menuButton">Timer</a>
+				<div id="navigationwrap">
+					<div id="navigation" align="center">
+						<a href="index.html" class="menuButton">Home</a>
+						<a href="configurations.html" class="menuButton">Configurazioni</a>
+						<a href="devices.html" class="menuButton">Dispositivi</a>
+						<a href="sensors.html" class="menuButton">Sensori</a>
+						<a href="timers.html" class="menuButton">Timer</a>
+					</div>
 				</div>
 			</nav>
 
-			<div>
-					<h2>
+			<hr/>
+			
+			<div id="contentliquid">
+				<div id="contentwrap">
+					<div id="content">
 						Timer #0 Start:
 						<input id="input_hh_timer0_on" size="2" />:<input id="input_mm_timer0_on" size="2" />:<input id="input_ss_timer0_on" size="2" /> 
 						Timer #0 Stop:
 						<input id="input_hh_timer0_off" size="2" />:<input id="input_mm_timer0_off" size="2" />:<input id="input_ss_timer0_off" size="2" />
 						Stato <button id="bt_timer0" class="tristateButton" onclick="toggleTimer0()">Unkown</button>
-					</h2> 					
-					<h2>
+						<br /> 					
 						Timer #1 Start:
 						<input id="input_hh_timer1_on" size="2" />:<input id="input_mm_timer1_on" size="2" />:<input id="input_ss_timer1_on" size="2" /> 
 						Timer #1 Stop:
 						<input id="input_hh_timer1_off" size="2" />:<input id="input_mm_timer1_off" size="2" />:<input id="input_ss_timer1_off" size="2" />
 						Stato <button id="bt_timer1" class="tristateButton" onclick="toggleTimer1()">Unkown</button>
-					</h2> 					
-					<h2>
+						<br /> 					
 						Timer #2 Start:
 						<input id="input_hh_timer2_on" size="2" />:<input id="input_mm_timer2_on" size="2" />:<input id="input_ss_timer2_on" size="2" /> 
 						Timer #2 Stop:
 						<input id="input_hh_timer2_off" size="2" />:<input id="input_mm_timer2_off" size="2" />:<input id="input_ss_timer2_off" size="2" />
 						Stato <button id="bt_timer2" class="tristateButton" onclick="toggleTimer2()">Unkown</button>
-					</h2> 					
-					<h2>
+						<br /> 					
 						Timer #3 Start:
 						<input id="input_hh_timer3_on" size="2" />:<input id="input_mm_timer3_on" size="2" />:<input id="input_ss_timer3_on" size="2" /> 
 						Timer #3 Stop:
 						<input id="input_hh_timer3_off" size="2" />:<input id="input_mm_timer3_off" size="2" />:<input id="input_ss_timer3_off" size="2" />
 						Stato <button id="bt_timer3" class="tristateButton" onclick="toggleTimer3()">Unkown</button>
-					</h2> 					
-</div>
-
-			<footer>
-				<p>
+						<br /> 					
+					</div>
+				</div>
+			</div>
+			
+			<hr />
+			
+			<footer id="footerwrap">
+				<div id="footer">
 					&copy; Copyright  by Antonio
-				</p>
+				</div>
 			</footer>
 		</div>
 	</body>
