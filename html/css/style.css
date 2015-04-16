@@ -13,19 +13,20 @@ p {
 
 #wrapper {
     width: 100%;
-    min-width: 1080px;
-    max-width: 1440px;
+    min-width: 720x;
+    max-width: 1080px;
     margin: 0 auto;
 }
 
 #headerwrap {
     width: 100%;
-    float: left;
+    float: center;
     margin: 0 auto;
 }
 
 #header {
-    height: 75px;
+    min-height: 40px;
+    max-height: 120px;
     background: #3366FF;
     border-radius: 10px;
     border: 1px solid #1f52eb;
@@ -35,12 +36,13 @@ p {
 
 #navigationwrap {
     width: 100%;
-    float: left;
+    float: center;
     margin: 0 auto;
 }
 
 #navigation {	
-    height: 40px;
+    min-height: 33px;
+    max-height:66px;
     background: #404040;
     border-radius: 10px;
     border: 1px solid #525252;
