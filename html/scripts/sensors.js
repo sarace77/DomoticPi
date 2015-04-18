@@ -8,13 +8,13 @@ webiopi().ready(init);
 function init() {
 	tmp = new Temperature("bmp");
 	pres = new Pressure("bmp");	
-	setInterval(updateUI, 1000);	
+	setInterval(updateUI, 5000);	
 }
 
 function updateUI() {
 	tmp.getCelsius(temperatureCallback);
 	pres.getHectoPascal(pressureCallBack);
-	webiopi().callMacro("getHumidity", 7, humidityCallBack);
+	webiopi().callMacro("getHumidity", [], humidityCallBack);
 	webiopi().callMacro("getUptime", [], uptimeCallBack);
 }   
 

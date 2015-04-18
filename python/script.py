@@ -1,27 +1,30 @@
+#!/usr/bin/env python
 import webiopi
 import datetime
 import Adafruit_DHT
-import json
 
 GPIO = webiopi.GPIO
-
-
 
 devices_list = []
 sensors_list = []
 timers_list = []
 
-all_status = "Unknown"
+all_status = ""
 
 all_on = False
 all_off = False
 
 manual_disable_timers = True
 
+dht_temperature = 0
+humidity = 0
+previous_s = 0
+
 class ExtSensorDHT11:
     def __init__(self, pin):
         self.sensor = Adafruit_DHT.DHT11
         self.pin = pin
+        self.type = "humidity"
 
 
 class DeviceTimer:
@@ -34,6 +37,7 @@ class DeviceTimer:
 class SensorDevice:
     def __init__(self):
         self.meteo = webiopi.deviceInstance("bmp") 
+        self.type = "meteo"
 
 class SwitchDevice:
     def __init__(self, name="dispositivo", pin = 0, status = False):
@@ -63,21 +67,23 @@ class SwitchDevice:
             
 def setup():
     global devices_list
+    global humidity
     global sensors_list
     global timers_list
 
-    devices_list.append(SwitchDevice("Relay 0", 22, False))
-    devices_list.append(SwitchDevice("Relay 1", 27, False))
-    devices_list.append(SwitchDevice("Relay 2", 17, False))
-    devices_list.append(SwitchDevice("Relay 3", 4, False))
+    devices_list.append(SwitchDevice("Relay 0", 18, False))
+    devices_list.append(SwitchDevice("Relay 1", 23, False))
+    devices_list.append(SwitchDevice("Relay 2", 24, False))
+    devices_list.append(SwitchDevice("Relay 3", 25, False))
     
-    sensors_list.append(SensorDevice())        
+    sensors_list.append(SensorDevice())
+    sensors_list.append(ExtSensorDHT11(19))        
     
     timers_list.append(DeviceTimer(0, 43200, 64800))
     timers_list.append(DeviceTimer(1, 43200, 64800))
     timers_list.append(DeviceTimer(2, 43200, 64800))
     timers_list.append(DeviceTimer(3, 43200, 64800))   
-    
+   
     for j in range(0,2):
         for i in range(0,len(devices_list)) :
             devices_list[i].toggle()
@@ -90,41 +96,56 @@ def loop():
     global all_on
     global all_status
     global devices_list
+    global dht_temperature
+    global humidity
+    global previous_s
     global sensors_list
     global timers_list   
 
-    all_status = "Unknown"
-
     now = datetime.datetime.now()
     now_s = now.hour * 3600 + now.minute * 60 + now.second
-
-    pressure = []
-    temperature = []
-
+    
+    pressure_list = []
+    temperature_list = []
+    
     for i in range(0, len(sensors_list)):
-        pressure.append(sensors_list[i].meteo.getHectoPascal())
-        temperature.append(sensors_list[i].meteo.getCelsius())
+        if sensors_list[i].type == "meteo":
+            pressure_list.append(sensors_list[i].meteo.getHectoPascal())
+            temperature_list.append(sensors_list[i].meteo.getCelsius())
+        elif sensors_list[i].type == "humidity":
+            if (now_s - previous_s) >= 300:
+                humidity, dht_temperature = Adafruit_DHT.read_retry(sensors_list[i].sensor, sensors_list[i].pin)
+                previous_s = now_s
+                print ((now_s - previous_s), ":", humidity, dht_temperature)
 
-    if (all_on or all_off) and (all_on != all_off):
-        if all_on:
-            all_status = "On"
-            for i in range(0, len(devices_list)) :
-                if not devices_list[i].status:
-                    devices_list[i].switchOn()
-        else:
-            all_status = "Off"
-            for i in range(0, len(devices_list)) :
-                if devices_list[i].status:
-                    devices_list[i].switchOff()
+    if all_on and not all_off:
+        all_status = "On"
+        for i in range(0, len(devices_list)) :
+            if not devices_list[i].status:
+                devices_list[i].switchOn()
+    elif not all_on and all_off:    
+        all_status = "Off"
+        for i in range(0, len(devices_list)) :
+            if devices_list[i].status:
+                devices_list[i].switchOff()
     else:
+        all_status = "Unknown"
         for i in range(0, len(timers_list)) :
             if timers_list[i].index >= 0 and timers_list[i].index < len(devices_list):
                 if timers_list[i].enabled and now_s >= timers_list[i].start and now_s < timers_list[i].stop:
                     devices_list[timers_list[i].index].switchOn()
                 elif timers_list[i].enabled and (now_s < timers_list[i].start or now_s >= timers_list[i].stop):
                     devices_list[timers_list[i].index].switchOff()
-            
 
+    
+    for i in range(0, len(devices_list)) :
+        if i == 0 :
+            all_on = devices_list[i].status
+            all_off = not devices_list[i].status
+        all_on = all_on and devices_list[i].status
+        all_off = all_off and (not devices_list[i].status)
+
+                    
 def destroy():
     for i in range(0, len(devices_list)) :
         devices_list[i].switchOff()
@@ -177,8 +198,18 @@ def enableTimer(index):
 
 
 @webiopi.macro
+def getHumidity():
+    global humidity
+    if humidity is not None:
+        return humidity
+    else:
+        return "None"
+
+
+@webiopi.macro
 def getStatus(index):
-    global devices_list
+    global all_status
+    global devices_list    
     if index == "All" or index == "all":
         return all_status
     i = int(index)        
@@ -266,14 +297,4 @@ def toggleRelay(index):
                     if timers_list[i].index == i:
                         timers_list[i].enabled = False
                 
-       
                 
-@webiopi.macro
-def getHumidity(pin):
-    hSensor = ExtSensorDHT11(int(pin))
-    humidity, temperature = Adafruit_DHT.read_retry(hSensor.sensor, hSensor.pin)
-    print (pin, humidity, temperature)
-    if humidity is not None:
-        return humidity
-    else:
-        return "None"

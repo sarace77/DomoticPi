@@ -9,7 +9,7 @@ localWebDir=html
 localCssDir=${localWebDir}/css
 localjsDir=${localWebDir}/scripts
 
-prjDir=${remoteBase}./workspace/webiopi
+prjDir=${remoteBase}./DomoticPi
 pyDir=${prjDir}/${localPyDir}
 webDir=${prjDir}/${localWebDir}
 cssDir=${prjDir}/${localCssDir}
