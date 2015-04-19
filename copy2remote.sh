@@ -15,6 +15,7 @@ webDir=${prjDir}/${localWebDir}
 cssDir=${prjDir}/${localCssDir}
 jsDir=${prjDir}/${localjsDir}
 
+$SCP config $prjDir
 $SCP ${localWebDir}/*.html $webDir
 $SCP ${localCssDir}/*.css $cssDir
 $SCP ${localjsDir}/*.js $jsDir

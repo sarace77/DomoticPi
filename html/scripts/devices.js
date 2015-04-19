@@ -3,8 +3,16 @@
  */
 
 webiopi().ready(init);
-			
+
 function init() {
+	var arg0 = ["18", "Relay0"];
+	var arg1 = ["23", "Relay1"];
+	var arg2 = ["24", "Relay2"];
+	var arg3 = ["25", "Relay3"];
+	webiopi().callMacro("addRelay", arg0, []);
+	webiopi().callMacro("addRelay", arg1, []);
+	webiopi().callMacro("addRelay", arg2, []);
+	webiopi().callMacro("addRelay", arg3, []);
 	setInterval(updateUI, 500);	
 }
 

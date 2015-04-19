@@ -8,7 +8,7 @@ webiopi().ready(init);
 function init() {
 	tmp = new Temperature("bmp");
 	pres = new Pressure("bmp");	
-	setInterval(updateUI, 5000);	
+	setInterval(updateUI, 1000);	
 }
 
 function updateUI() {
