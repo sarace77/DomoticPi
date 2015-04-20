@@ -47,12 +47,23 @@
 				<div id="contentwrap">
 					<div id="content">
 						<h2> Dispositivi connessi: </h2>
-	    		    	Relay #0 <button id="bt_relay0" class="tristateButton" onclick="toggleRelay0()">Unkown</button><br/>
+						<div id="devices">
+							
+						</div>
+						<div align="right">
+							<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggleAll()">Unkown</button> </h3>
+						</div>						
+
+<!--	    		    	Relay #0 <button id="bt_relay0" class="tristateButton" onclick="toggleRelay0()">Unkown</button><br/>
     	    			Relay #1 <button id="bt_relay1" class="tristateButton" onclick="toggleRelay1()">Unkown</button><br/>
         				Relay #2 <button id="bt_relay2" class="tristateButton" onclick="toggleRelay2()">Unkown</button><br/>
        		 			Relay #3 <button id="bt_relay3" class="tristateButton" onclick="toggleRelay3()">Unkown</button>
+							
+-->						
+						<hr/>
 						<div align="right">
-							<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggleAll()">Unkown</button> </h3>
+							<button id="addDevice" onclick="showDevice('bt_gpio02',false)" class="addButton">Add</button>
+							<button id="delDevice" onclick="updateDeviceList()" class="delButton">Del</button>
 						</div>
 					</div>
 				</div>

@@ -2,17 +2,61 @@
  * @author Antonio
  */
 
+var devices_pin = [  2,  3,  4, 17, 27, 22, 10,  9, 11, 5, 6, 
+					13, 19, 26, 14, 15, 18, 23, 24, 25, 8, 7, 
+					12, 16, 20, 21];
+
+var devices_visibility = 	[false, false, false, false, false, false, false, false, false, false, false, 
+							 false, false, false, false, false,  true,  true,  true,  true, false, false, 
+							 false, false, false, false];
+
+function updateDeviceList() {
+	var placeholder = document.getElementById("devices");
+	var elements = devices_pin;
+	var states = devices_visibility;
+	for (var i = 0, item; item = elements[i]; i++) {
+		var str_id = "gpio"+ item.toString();
+		if (states[i]){
+			var h3 = document.createElement("h3"); 
+			var btn = document.createElement("button");
+			var txt = document.createTextNode(str_id + String(": Unknown"));
+			btn.setAttribute("id", str_id);
+			btn.setAttribute("class", "tristateButton");
+			btn.setAttribute("onClick", String("toggle(#bt_") +  item.toString() + String(")"));
+			btn.appendChild(txt);
+			h3.appendChild(btn);			
+			placeholder.appendChild(h3);
+		}
+	}
+}
+
+function showDevice(id, status) {
+	var divelement = document.getElementById(id);
+	if (String(status) == "true") {		
+		divelement.style.display = 'block'; 
+	} else {
+		divelement.style.display = 'none'; 
+	}
+}
+
+function toggle(id) {
+	
+}
+
 webiopi().ready(init);
 
 function init() {
-	var arg0 = ["18", "Relay0"];
-	var arg1 = ["23", "Relay1"];
-	var arg2 = ["24", "Relay2"];
-	var arg3 = ["25", "Relay3"];
-	webiopi().callMacro("addRelay", arg0, []);
-	webiopi().callMacro("addRelay", arg1, []);
-	webiopi().callMacro("addRelay", arg2, []);
-	webiopi().callMacro("addRelay", arg3, []);
+	var pins = devices_pin;
+	var elements = devices_visibility;
+	for (var i = 0, item; item = elements[i]; i++) {
+		if (item) {
+			var pin = pins[i];
+			var name = String("gpio") + String(pin);
+			var arg = [pin, name];
+			webiopi().callMacro("addRelay", arg, []);									
+		}		
+	}
+
 	setInterval(updateUI, 500);	
 }
 
