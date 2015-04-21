@@ -19,16 +19,20 @@ function updateUI() {
 }   
 
 function humidityCallBack(macroName, args, data) {
-	$("#bt_humidity").text(data);
+	var item = document.getElementById("humidity");
+	item.innerHTML = String("<b>Umidità: </b><i>") + String(data) + String("%</i>");
 }
 function temperatureCallback(sensorName, data) {
-	$("#bt_temperature").text(data);
+	var item = document.getElementById("int_temperature");	
+	item.innerHTML = String("<b>Temperatura Interna: </b><i>") + String(data) + String("°C</i>");
 }					
 
 function pressureCallBack(sensorName, data) {
-	$("#bt_pressure").text(data);
+	var item = document.getElementById("bar_pressure");
+	item.innerHTML(String("<b>Pressione Barometrica: </b><i>") + String(data) + String("°C</i>"));
 }
 
 function uptimeCallBack(macroName, args, data) {
-	$("#bt_uptime").val(data);
+	var item = document.getElementById("systemUpTime");
+	item.innerHTML(String("<b>Sistema acceso e funzionante da: </b><i>") + String(data) + String("</i>"));
 }

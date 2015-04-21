@@ -22,7 +22,7 @@
 	    <script type="text/javascript" src="scripts/devices.js"></script>
 	</head>
 
-	<body>
+	<body onload="updateDeviceList()">
 		<div id="wrapper">
 			<header id="headerwrap">
 				<div id="header">
@@ -53,17 +53,15 @@
 						<div align="right">
 							<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggleAll()">Unkown</button> </h3>
 						</div>						
-
-<!--	    		    	Relay #0 <button id="bt_relay0" class="tristateButton" onclick="toggleRelay0()">Unkown</button><br/>
-    	    			Relay #1 <button id="bt_relay1" class="tristateButton" onclick="toggleRelay1()">Unkown</button><br/>
-        				Relay #2 <button id="bt_relay2" class="tristateButton" onclick="toggleRelay2()">Unkown</button><br/>
-       		 			Relay #3 <button id="bt_relay3" class="tristateButton" onclick="toggleRelay3()">Unkown</button>
-							
--->						
 						<hr/>
-						<div align="right">
-							<button id="addDevice" onclick="showDevice('bt_gpio02',false)" class="addButton">Add</button>
-							<button id="delDevice" onclick="updateDeviceList()" class="delButton">Del</button>
+						<p id="inputPinContainer" class="hiddenInput">
+							Pin: <input id="inputPin" type="number" min="2" max="26" />
+							<button id="okButton" class="onButton" onclick="validatePin()">OK</button>
+							<button id="cancelButton" class="offButton">Cancel</button>
+						</p>
+						<div id="editButtons" align="right">
+							<button id="addDevice" onclick="showInput(true)" class="addButton">Add</button>
+							<button id="delDevice" onclick="showInput(false)" class="delButton">Del</button>
 						</div>
 					</div>
 				</div>

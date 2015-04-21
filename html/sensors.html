@@ -23,7 +23,7 @@
 
 	</head>
 
-	<body>
+	<body onload="testFun()">
 		<div id="wrapper">
 			<header id="headerwrap">
 				<div id="header">
@@ -48,10 +48,10 @@
 				<div id="contentwrap">
 					<div id="content">
 						<h2> Sensori: </h2>
-						<h3>Temperatura Interna <button id="bt_temperature" class="sensorButton"> --- </button> °C</h3>
-						<h3>Pressione Barometrica <button id="bt_pressure" class="sensorButton"> --- </button> HPa</h3>
-						<h3>Umidità <button id="bt_humidity" class="sensorButton"> --- </button> %</h3><hr/>				
-						<h3> Sistema acceso e funzionante da: <input readonly="readonly" id="bt_uptime" size="10"/> </h3>
+						<div id="int_temperature"> </div>
+						<div id="bar_pressure" > </div>
+						<div id="humidity"> </div><hr/>				
+						<div id="systemUpTime"> </div>
 					</div>
 				</div>
 			</div>
