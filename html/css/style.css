@@ -287,7 +287,7 @@ p {
 	font-weight:bold;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffee66;
-	min-width: 80 px;
+	min-width: 120 px;
 }
 .tristateButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ffab23), color-stop(1, #ffec64));

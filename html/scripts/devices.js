@@ -28,12 +28,17 @@ function updateDeviceList() {
 			var h3 = document.createElement("h3"); 
 			var btn = document.createElement("button");
 			var txt = document.createTextNode(str_id + String(": Unknown"));
+			var pin = item;
+			var name = String("gpio") + String(pin);
+			var arg = [pin, name];
+			webiopi().callMacro("addRelay", arg, []);									
 			btn.setAttribute("id", str_id);
 			btn.setAttribute("class", "tristateButton");
-			btn.setAttribute("onClick", String("toggle(#bt_") +  item.toString() + String(")"));
+			btn.setAttribute("onClick", String("toggle(") +  item.toString() + String(")"));
 			btn.appendChild(txt);
 			h3.appendChild(btn);			
 			placeholder.appendChild(h3);
+			window.alert(btn.getAttribute("id"));
 		}
 	}
 }
@@ -56,7 +61,9 @@ function showInput(insMode) {
 }
 
 function toggle(id) {
-	
+	var btn_id = String("gpio") + id.toString();
+	var item = document.getElementById(btn_id);
+	window.alert(item.className);
 }
 
 function validatePin() {
@@ -90,7 +97,7 @@ function validatePin() {
 webiopi().ready(init);
 
 function init() {
-	var pins = devices_pin;
+/*	var pins = devices_pin;
 	var elements = devices_visibility;
 	for (var i = 0, item; item = elements[i]; i++) {
 		if (item) {
@@ -100,7 +107,7 @@ function init() {
 			webiopi().callMacro("addRelay", arg, []);									
 		}		
 	}
-
+*/
 	setInterval(updateUI, 500);	
 }
 
