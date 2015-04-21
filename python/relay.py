@@ -43,13 +43,13 @@ all_off = False
 all_on = False
 manual_disable_timers = True
 devices_list = []
+previous_s = 0
 timers_list = []
         
             
 def setup():
     global devices_list
     global timers_list
-
     
     timers_list.append(DeviceTimer(0, 43200, 64800))
     timers_list.append(DeviceTimer(1, 43200, 64800))
@@ -61,7 +61,11 @@ def loop():
     global all_on
     global all_status
     global devices_list
-    global timers_list   
+    global previous_s
+    global timers_list
+    
+    now = datetime.datetime.now()
+    now_s = now.hour * 3600 + now.minute * 60 + now.second
 
     if all_on and not all_off:
         all_status = "On"
