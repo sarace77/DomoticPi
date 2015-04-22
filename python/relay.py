@@ -161,17 +161,18 @@ def enableTimer(index):
 
 
 @webiopi.macro
-def getStatus(index):
+def getStatus(index, name):
     global all_status
     global devices_list    
     if index == "All" or index == "all":
         return all_status
-    i = int(index)        
-    if i >= 0 and i < len(devices_list):
-        if devices_list[i].status:
-            return "On"
-        else:
-            return "Off"
+    pin = int(index)        
+    for i in range(0, len(devices_list)):
+        if devices_list[i].pin == pin:
+            if devices_list[i].status:
+                return "On"
+            else:
+                return "Off"           
     return "Unknown"
 
 
@@ -239,14 +240,15 @@ def toggleRelay(index):
             all_on = True
             all_off = False
     else:
-        i = int(index)
-        all_on = False
-        all_off = False
-        if i >= 0 and i < len(devices_list):            
-            devices_list[i].toggle()
-            if manual_disable_timers:
-                for j in range(0, len(timers_list)):
-                    if timers_list[i].index == i:
-                        timers_list[i].enabled = False
+        pin = int(index)
+        for i in range (0, len(devices_list)) :
+            if devices_list[i].pin == pin:               
+                all_on = False
+                all_off = False
+                devices_list[i].toggle()
+#                if manual_disable_timers:
+#                    for j in range(0, len(timers_list)):
+#                        if timers_list[i].index == i:
+#                            timers_list[i].enabled = False
                 
                 

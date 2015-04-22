@@ -19,6 +19,43 @@ var devices_visibility = 	[false, false, false, false, false, false, false, fals
  */							 
 var insertMode = false;							 
 
+
+/**
+ * Start of webio related functions
+ */
+webiopi().ready(init);
+
+
+/**
+ * Function used to initialize webiopi js module
+ */
+function init() {
+	setInterval(updateUI, 2000);	
+}
+
+
+/**
+ * Main Loop: update status of UI
+ */
+function updateUI() {
+	var elements = devices_pin;
+	var states = devices_visibility;
+	for (var i = 0, item; item = elements[i]; i++) {
+		if (states[i]) {
+			var str_id = "gpio";
+			if (item.toString().length == 1) {
+				str_id += "0";				
+			}
+			str_id += + item.toString();
+			var args = [item.toString(), str_id];
+			webiopi().callMacro("getStatus", args, updateDeviceStatusCallBack);			
+		}
+	}
+	var allArgs = ["All", "bt_all_relay"];
+	webiopi().callMacro("getStatus", allArgs, updateDeviceStatusCallBack);			
+}
+
+
 /**
  * UI function: It hides inputPin field/buttons and shows add/del buttons 
  */
@@ -30,13 +67,6 @@ function discardChanges() {
 	editItem = document.getElementById("inputPin");
 }
 
-
-/**
- * Function used to initialize webiopi js module
- */
-function init() {
-	setInterval(updateUI, 500);	
-}
 
 
 /**
@@ -53,7 +83,6 @@ function showInput(insMode) {
 
 /**
  * Used to toggle pin (device) status
- * TODO adding python script GPIO status support
  */
 function toggle(id) {
 	if (id.toString() != "-1") {
@@ -64,14 +93,10 @@ function toggle(id) {
 			btn_id += String("0") + id.toString();
 		}
 		var item = document.getElementById(btn_id);
-		window.alert(item.className);
-//		TODO uncomment the followng line		
-//		webiopi().callMacro("toggleRelay", id.toString() , updateDeviceStatusCallBack);
+		webiopi().callMacro("toggleRelay", id.toString() , updateDeviceStatusCallBack);
 	} else {
 		var item = document.getElementById("bt_all_relay");
-//		TODO uncomment the followng line		
-//		webiopi().callMacro("toggleRelay", "All" , updateDeviceStatusCallBack);
-		window.alert(item.id + item.className);
+		webiopi().callMacro("toggleRelay", "All" , updateDeviceStatusCallBack);
 	}
 }
 
@@ -126,8 +151,7 @@ function updateDeviceList() {
 			h3.innerHTML = String("Device ") + str_id + String(": ");
 			h3.appendChild(btn);			
 			placeholder.appendChild(h3);
-			//TODO uncomment the following line
-			//webiopi().callMacro("addRelay", arg, updateDeviceStatusCallBack);									
+			webiopi().callMacro("addRelay", arg, updateDeviceStatusCallBack);									
 		}
 	}
 }
@@ -138,20 +162,12 @@ function updateDeviceList() {
  */
 function updateDeviceStatusCallBack(macroname, args, data) {
 	var pin = args[0];
-	var str_id = "gpio";
-	if (pin.toString() != "All")
-	{
-		if (pin.toString().length == 2) {
-			str_id += pin.toString();
-		} else {
-			str_id += String("0") + pin.toString(); 
-		}
-	} else {
+	var str_id = args[1];
+	if (pin.toString() == "All") {
 		str_id = "bt_all_relay";
-	}
+	} 
 	var item = document.getElementById(str_id);
-	window.alert(item.getAttribute("value"));
-	item.setAttribute("value", data);
+	item.innerHTML = data;
 	if (data == "On") {
 		item.setAttribute("class", "onButton");
 	} else if (data == "Off") {
@@ -159,20 +175,6 @@ function updateDeviceStatusCallBack(macroname, args, data) {
 	} else {
 		item.setAttribute("class", "tristateButton");
 	}	
-}
-
-
-/**
- * Main Loop: update status of UI
- */
-function updateUI() {
-	var elements = devices_pin;
-	var states = devices_visibility;
-	for (var i = 0, item; item = elements[i]; i++) {
-		if (states[i]) {
-			webiopi().callMacro("getStatus", item.toString(), updateDeviceStatusCallBack);			
-		}
-	}
 }
 
 
@@ -195,8 +197,7 @@ function validatePin() {
 			var name = String("gpio") + String(pin);
 			var arg = [Number(pin), name];
 			if (insertMode) {
-//				TODO uncomment the followng line						
-//				webiopi().callMacro("addRelay", arg, []);									
+				webiopi().callMacro("addRelay", arg, []);									
 			} else {
 //				TODO remove Relay from python array
 			}
@@ -207,11 +208,3 @@ function validatePin() {
 		window.alert(String("Pin #") + String(pin) + String(" is not a valid pin!"));
 	}
 }
-
-
-/**
- * Start of webio related functions
- */
-webiopi().ready(init);
-
-
