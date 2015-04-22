@@ -51,13 +51,13 @@
 							
 						</div>
 						<div align="right">
-							<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggleAll()">Unkown</button> </h3>
+							<h3>Tutti i dispositivi <button id="bt_all_relay" class="tristateButton" onclick="toggle(-1)">Unkown</button> </h3>
 						</div>						
 						<hr/>
 						<p id="inputPinContainer" class="hiddenInput">
 							Pin: <input id="inputPin" type="number" min="2" max="26" />
 							<button id="okButton" class="onButton" onclick="validatePin()">OK</button>
-							<button id="cancelButton" class="offButton">Cancel</button>
+							<button id="cancelButton" class="offButton" onclick="discardChanges()">Cancel</button>
 						</p>
 						<div id="editButtons" align="right">
 							<button id="addDevice" onclick="showInput(true)" class="addButton">Add</button>
