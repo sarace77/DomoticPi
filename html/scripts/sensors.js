@@ -15,24 +15,31 @@ function updateUI() {
 	tmp.getCelsius(temperatureCallback);
 	pres.getHectoPascal(pressureCallBack);
 	webiopi().callMacro("getHumidity", [], humidityCallBack);
+	webiopi().callMacro("getLuminosity", [], luminosityCallBack);
 	webiopi().callMacro("getUptime", [], uptimeCallBack);
 }   
 
 function humidityCallBack(macroName, args, data) {
 	var item = document.getElementById("humidity");
-	item.innerHTML = String("<b>Umidità: </b><i>") + String(data) + String("%</i>");
+	item.innerHTML = String("<h3>Umidità: </h3><i>") + String(data) + String("%</i>");
 }
+
+function luminosityCallBack(macroName, args, data) {
+	var item = document.getElementById("luminosity");
+	item.innerHTML = String("<h3>Luminosità: </h3><i>") + String(data) + String(" lux</i>");
+}
+
 function temperatureCallback(sensorName, data) {
 	var item = document.getElementById("int_temperature");	
-	item.innerHTML = String("<b>Temperatura Interna: </b><i>") + String(data) + String("°C</i>");
+	item.innerHTML = String("<h3>Temperatura Interna: </h3><i>") + String(data) + String("°C</i>");
 }					
 
 function pressureCallBack(sensorName, data) {
 	var item = document.getElementById("bar_pressure");
-	item.innerHTML(String("<b>Pressione Barometrica: </b><i>") + String(data) + String("°C</i>"));
+	item.innerHTML = String("<h3>Pressione Barometrica: </h3><i>") + String(data) + String("°C</i>");
 }
 
 function uptimeCallBack(macroName, args, data) {
 	var item = document.getElementById("systemUpTime");
-	item.innerHTML(String("<b>Sistema acceso e funzionante da: </b><i>") + String(data) + String("</i>"));
+	item.innerHTML = String("<h3>Sistema acceso e funzionante da: </h3><i>") + String(data) + String("</i>");
 }
