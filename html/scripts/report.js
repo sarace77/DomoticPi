@@ -70,3 +70,14 @@ function timer3StatusCallback(macroName, args, data) {
 		$("#bt_timer3").attr("class", "onButton");
 	}
 }
+
+
+function brightLed(id) {
+	var myLed = document.getElementById(id); 
+  	myLed.setAttribute("class", "led-blue");
+}
+
+function darkLed(id) {
+	var myLed = document.getElementById(id); 
+  	myLed.setAttribute("class", "led-black");
+}

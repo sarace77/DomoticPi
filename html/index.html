@@ -46,21 +46,29 @@
 			
 			<div id="contentliquid">
 				<div id="contentwrap">
-					<div id="content">
-						<h2>Riepilogo</h2>
-						<h3>Sistema acceso e funzionante da: <input readonly="readonly" id="bt_uptime" size="10"/> </h3>
-						<ul>
-							<li>Timer 0 <button id="bt_timer0" class="tristateButton" >Unkown</button></li>
-							<li>Timer 1 <button id="bt_timer1" class="tristateButton" >Unkown</button></li>
-							<li>Timer 2 <button id="bt_timer2" class="tristateButton" >Unkown</button></li>
-							<li>Timer 3 <button id="bt_timer3" class="tristateButton" >Unkown</button></li>					
-						</ul>
-						<div class="maskEnclosure">
-							<div class="buttonEnclosure">
-							  <button class="upSwitch"> + </button> <br />
-							  <button class="downSwitch"> - </button>
-							</div>
-						</div>
+					<div id="content" align="center">
+						<table>
+							<td>
+								<div class="maskEnclosure">
+									<div id="led0Up" class="led-black"> </div>
+								  	<div class="buttonEnclosure">
+								    	<button class="upSwitch" onmousedown="brightLed('led0Up')" onmouseup="darkLed('led0Up')"> + </button> <br />
+								    	<button class="downSwitch" onmousedown="brightLed('led0Down')" onmouseup="darkLed('led0Down')"> - </button>
+									</div>
+								  	<div id="led0Down" class="led-black"> </div>
+								</div>
+							</td>
+							<td>
+								<div class="maskEnclosure">
+							  		<div id="led1Up" class="led-black"> </div>
+							  		<div class="buttonEnclosure">
+							    		<button class="upSwitch" onmousedown="brightLed('led1Up')" onmouseup="darkLed('led1Up')"> + </button> <br />
+							    		<button class="downSwitch" onmousedown="brightLed('led1Down')" onmouseup="darkLed('led1Down')"> - </button>
+							  		</div>
+							  		<div id="led1Down" class="led-black"> </div>
+								</div>
+							</td>
+						</table>
 					</div>
 				</div>
 			</div>
