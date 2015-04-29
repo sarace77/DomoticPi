@@ -27,7 +27,7 @@
 		<div id="wrapper">
 			<header id="headerwrap">
 				<div id="header">
-					<h1>Benvenuti nella pagina principale di DomoticPi</h1>
+					<h1>DomoticPi Demo</h1>
 				</div>
 			</header>
 			<nav>
@@ -48,33 +48,42 @@
 				<div id="contentwrap">
 					<div id="content" align="center">
 						<table>
-							<td>
-								<div class="maskEnclosure">
-									<div id="led0Up" class="led-black"> </div>
-								  	<div class="buttonEnclosure">
-								    	<button class="upSwitch" onmousedown="brightLed('led0Up')" onmouseup="darkLed('led0Up')"><span class="iconicfill-arrow-up"> </span></button> <br />
-								    	<button class="downSwitch" onmousedown="brightLed('led0Down')" onmouseup="darkLed('led0Down')"><span class="iconicfill-arrow-down"> </span> </button>
+							<tr>
+								<td>
+									<table>
+										<td>
+											<div class="maskEnclosure">
+												<div id="led0Up" class="led-black"> </div>
+											  	<div class="buttonEnclosure">
+											    	<button class="upSwitch" ontouchstart="brightLed('led0Up')" ontouchend="darkLed('led0Up')" onmousedown="brightLed('led0Up')" onmouseup="darkLed('led0Up')"><span class="iconicfill-arrow-up"> </span></button> <br />
+											    	<button class="downSwitch" ontouchstart="brightLed('led0Down')" ontouchend="darkLed('led0Down')" onmousedown="brightLed('led0Down')" onmouseup="darkLed('led0Down')"><span class="iconicfill-arrow-down"> </span> </button>
+												</div>
+											  	<div id="led0Down" class="led-black"> </div>
+											</div>
+										</td>
+										<td>
+											<div class="maskEnclosure">
+										  		<div id="led1Up" class="led-black"> </div>
+										  		<div class="buttonEnclosure">
+										    		<button class="upSwitch" ontouchstart="brightLed('led1Up')" ontouchend="darkLed('led1Up')" onmousedown="brightLed('led1Up')" onmouseup="darkLed('led1Up')"><span class="iconicfill-arrow-up"> </span></button> <br />
+										    		<button class="downSwitch" ontouchstart="brightLed('led1Down')" ontouchend="darkLed('led1Down')" onmousedown="brightLed('led1Down')" onmouseup="darkLed('led1Down')"><span class="iconicfill-arrow-down"> </span></button>
+										  		</div>
+										  		<div id="led1Down" class="led-black"> </div>
+											</div>
+										</td>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="barEnclosure" width="300px">
+										<div class="progress-bar">
+		    								</h3><span id="luminosity"> </span>
+											<h2>Luminosità (in lux)</h2>
+										</div>
 									</div>
-								  	<div id="led0Down" class="led-black"> </div>
-								</div>
-							</td>
-							<td>
-								<div class="maskEnclosure">
-							  		<div id="led1Up" class="led-black"> </div>
-							  		<div class="buttonEnclosure">
-							    		<button class="upSwitch" onmousedown="brightLed('led1Up')" onmouseup="darkLed('led1Up')"><span class="iconicfill-arrow-up"> </span></button> <br />
-							    		<button class="downSwitch" onmousedown="brightLed('led1Down')" onmouseup="darkLed('led1Down')"><span class="iconicfill-arrow-down"> </span></button>
-							  		</div>
-							  		<div id="led1Down" class="led-black"> </div>
-								</div>
-							</td>
-							<td>
-								<div class="barEnclosure" width="300px">
-									<div class="progress-bar">
-	    								<span> </span>
-									</div>
-								</div>
-							</td>
+								</td>
+							</tr>
 						</table>
 					</div>
 				</div>

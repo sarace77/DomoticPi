@@ -49,7 +49,7 @@ class TSL2591:
         self.bus =          smbus.SMBus(1) 
         self.address        = TSL2591_ADDR
         self.channel        = TSL2591_FULLSPECTRUM
-        self.gain           = TSL2591_GAIN_HIGH
+        self.gain           = TSL2591_GAIN_MED
         self.integration    = TSL2591_INTEGRATIONTIME_600MS
         self.sensorID       = self.read8(0x12)
         self.enable()

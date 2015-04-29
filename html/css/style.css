@@ -20,7 +20,7 @@ p {
 
 #wrapper {
     width: 100%;
-    min-width: 720x;
+    min-width: 400px;
     max-width: 1080px;
     margin: 0 auto;
 }
@@ -417,6 +417,7 @@ p {
     border: solid #171717 1px;
   	width: 60px;
   	height: 50px;
+  	outline: none;
 }
 
 .upSwitch:active {
@@ -428,7 +429,7 @@ p {
   	background-image: linear-gradient(to bottom, #272727, #171717);
     text-shadow: 1px 1px 3px #9999ff;
 	border: solid #171717 1px;
-
+  	outline: none;
 }
 
 .downSwitch {
@@ -453,6 +454,7 @@ p {
     border: solid #171717 1px;
   	width: 60px;
   	height: 50px;
+	outline: none;
 }
 
 .downSwitch:active {
@@ -463,12 +465,11 @@ p {
   	background-image: -o-linear-gradient(top, #171717, #272727);
   	background-image: linear-gradient(to bottom, #171717, #272727);
   	text-shadow: 1px 1px 3px #9999ff;
-	border: solid #171717 1px;
-	
+	border: solid #171717 1px;	
 	-webkit-box-shadow: 2px 2px 3px #66bbff;
   	-moz-box-shadow: 2px 2px 3px #66bbff;
   	box-shadow: 2px 2px 3px linear-gradient(to bottom, #171717, #66bbff);
-
+	outline: none;
 }
 
 .buttonEnclosure {
@@ -506,8 +507,8 @@ p {
 }
 
 .barEnclosure {
-  width: 400px;
-  height: 190px;
+  width: 360px;
+  height: 120px;
   background: #000000;
   background-image: -webkit-linear-gradient(top, #171717, #000000);
   background-image: -moz-linear-gradient(top, #171717, #000000);
@@ -517,7 +518,7 @@ p {
   -webkit-border-radius: 10 10 10 10;
   -moz-border-radius: 10 10 10 10;
   border-radius: 10px 10px 10px 10px;
-  padding: 10px 40px 20px 40px;
+  padding: 10px 10px 10px 10px;
   border: solid #272727 1px;
 }
 
@@ -573,7 +574,7 @@ p {
     background-color: #1a1a1a;
     height: 25px;
     padding: 5px;
-    width: 360px;
+    width: 340px;
     margin: 60px 0;
              
     -moz-border-radius: 5px;
