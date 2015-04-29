@@ -61,10 +61,8 @@ function updateLedCallBack(macroname, args, data) {
 }
 
 function luminosityCallBack(macroName, args, data) {
-	var item = document.getElementById("luminosity");
 	var lux = parseInt(data);
-	item.innerHTML = "<h3>Luminosità misurata: " + lux + " lux</h3>";
-	item = $('.progress-bar span');
+	var item = $('.progress-bar span');
 	lux = lux /10;
 	lux = lux.toString();
 	item.css('width', lux + '%');
