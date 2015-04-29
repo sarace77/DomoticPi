@@ -1,4 +1,11 @@
 @import url("reset.css");
+@import url("http://weloveiconfonts.com/api/?family=iconicfill");
+
+/* iconicfill */
+[class*="iconicfill-"]:before {
+  font-family: 'IconicFill', sans-serif;
+}
+
 
 body {
     font-family: Verdana, Arial, Helvetica, sans-serif;
