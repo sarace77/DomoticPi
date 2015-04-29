@@ -50,7 +50,7 @@ class TSL2591:
         self.address        = TSL2591_ADDR
         self.channel        = TSL2591_FULLSPECTRUM
         self.gain           = TSL2591_GAIN_HIGH
-        self.integration    = TSL2591_INTEGRATIONTIME_500MS
+        self.integration    = TSL2591_INTEGRATIONTIME_600MS
         self.sensorID       = self.read8(0x12)
         self.enable()
     
@@ -82,9 +82,9 @@ class TSL2591:
         lux2 = ((TSL2591_LUX_COEFC * ch0) - (TSL2591_LUX_COEFD * ch1)) / cpl
         
         if lux1 > lux2:
-            return lux1 * 20
+            return lux1
         
-        return lux2 * 20
+        return lux2
         
     def disable(self):
         self.write8(TSL2591_COMMAND_BIT | TSL2591_REGISTER_ENABLE, TSL2591_ENABLE_POWEROFF)
