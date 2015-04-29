@@ -26,7 +26,6 @@ function humidityCallBack(macroName, args, data) {
 
 function luminosityCallBack(macroName, args, data) {
 	var item = document.getElementById("luminosity");
-	item.innerHTML = String("<h3>Luminosità: </h3><i>") + String(data) + String(" lux</i>");
 }
 
 function temperatureCallback(sensorName, data) {

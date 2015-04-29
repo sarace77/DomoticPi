@@ -224,6 +224,46 @@ def removeTimer(index):
 
 
 @webiopi.macro
+def switchOff(index):
+    global all_off
+    global all_on
+    global devices_list
+
+    if index == "All" or index == "all":
+        all_off = True
+        all_on = False
+    else:
+        pin = int(index)
+        for i in range (0, len(devices_list)) :
+            if devices_list[i].pin == pin:               
+                all_on = False
+                all_off = False
+                devices_list[i].switchOff()
+                return devices_list[i].status
+    return index 
+
+
+@webiopi.macro
+def switchOn(index):
+    global all_off
+    global all_on
+    global devices_list
+
+    if index == "All" or index == "all":
+        all_on = True
+        all_off = False
+    else:
+        pin = int(index)
+        for i in range (0, len(devices_list)) :
+            if devices_list[i].pin == pin:               
+                all_on = False
+                all_off = False
+                devices_list[i].switchOn()
+                return devices_list[i].status
+    return index 
+
+
+@webiopi.macro
 def toggleRelay(index):
     global all_off
     global all_on

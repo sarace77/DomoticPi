@@ -3,81 +3,70 @@
  */
 webiopi().ready(init);
 function init() {
-	setInterval(updateUI, 1000);	
+	var args = [18, "gpio18"];
+	webiopi().callMacro("addRelay", args, updateLedCallBack);									
+	args = [23, "gpio23"];
+	webiopi().callMacro("addRelay", args, updateLedCallBack);									
+	args = [24, "gpio24"];
+	webiopi().callMacro("addRelay", args, updateLedCallBack);									
+	args = [25, "gpio25"];
+	webiopi().callMacro("addRelay", args, updateLedCallBack);									
+	setInterval(updateUI, 500);	
 }
 
 function updateUI() {
-	webiopi().callMacro("getTimerStatus","0",timer0StatusCallback);
-	webiopi().callMacro("getTimerStatus","1",timer1StatusCallback);
-	webiopi().callMacro("getTimerStatus","2",timer2StatusCallback);
-	webiopi().callMacro("getTimerStatus","3",timer3StatusCallback);
-	webiopi().callMacro("getUptime", [], uptimeCallBack);
+	webiopi().callMacro("getLuminosity", [], luminosityCallBack);
 }   
-
-function uptimeCallBack(macroName, args, data) {
-	$("#bt_uptime").val(data);
-}
-
-function timer0StatusCallback(macroName, args, data) {
-	$("#bt_timer0").text(data);
-	if (data == "Off") {
-		$("#bt_timer0").attr("class", "offButton");
-	}
-	if (data == "Unknown") {
-		$("#bt_timer0").attr("class", "tristateButton");
-	}
-	if (data == "On") {
-		$("#bt_timer0").attr("class", "onButton");
-	}
-}
-
-function timer1StatusCallback(macroName, args, data) {
-	$("#bt_timer1").text(data);
-	if (data == "Off") {
-		$("#bt_timer1").attr("class", "offButton");
-	}
-	if (data == "Unknown") {
-		$("#bt_timer1").attr("class", "tristateButton");
-	}
-	if (data == "On") {
-		$("#bt_timer1").attr("class", "onButton");
-	}
-}
-
-function timer2StatusCallback(macroName, args, data) {
-	$("#bt_timer2").text(data);
-	if (data == "Off") {
-		$("#bt_timer2").attr("class", "offButton");
-	}
-	if (data == "Unknown") {
-		$("#bt_timer2").attr("class", "tristateButton");
-	}
-	if (data == "On") {
-		$("#bt_timer2").attr("class", "onButton");
-	}
-}
-
-
-function timer3StatusCallback(macroName, args, data) {
-	$("#bt_timer3").text(data);
-	if (data == "Off") {
-		$("#bt_timer3").attr("class", "offButton");
-	}
-	if (data == "Unknown") {
-		$("#bt_timer3").attr("class", "tristateButton");
-	}
-	if (data == "On") {
-		$("#bt_timer3").attr("class", "onButton");
-	}
-}
-
 
 function brightLed(id) {
 	var myLed = document.getElementById(id); 
   	myLed.setAttribute("class", "led-blue");
+  	switch(id) {
+  		case "led0Up":
+  			webiopi().callMacro("switchOn", "18", updateLedCallBack);
+  			break;
+  		case "led1Up":
+  			webiopi().callMacro("switchOn", "24", updateLedCallBack);
+  			break;
+  		case "led0Down":
+  			webiopi().callMacro("switchOn", "23", updateLedCallBack);
+  			break;
+  		case "led1Down":
+  			webiopi().callMacro("switchOn", "25", updateLedCallBack);
+  			break;
+  	}
 }
 
 function darkLed(id) {
 	var myLed = document.getElementById(id); 
   	myLed.setAttribute("class", "led-black");
+  	switch(id) {
+  		case "led0Up":
+  			webiopi().callMacro("switchOff", "18", updateLedCallBack);
+  			break;
+  		case "led1Up":
+  			webiopi().callMacro("switchOff", "24", updateLedCallBack);
+  			break;
+  		case "led0Down":
+  			webiopi().callMacro("switchOff", "23", updateLedCallBack);
+  			break;
+  		case "led1Down":
+  			webiopi().callMacro("switchOff", "25", updateLedCallBack);
+  			break;
+  	}
 }
+
+function updateLedCallBack(macroname, args, data) {
+
+}
+
+function luminosityCallBack(macroName, args, data) {
+	var item = document.getElementById("luminosity");
+	var lux = parseInt(data);
+	item.innerHTML = "<h3>Luminosità misurata: " + lux + " lux</h3>";
+	item = $('.progress-bar span');
+	lux = lux /10;
+	lux = lux.toString();
+	item.css('width', lux + '%');
+}
+

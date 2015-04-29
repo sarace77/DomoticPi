@@ -17,9 +17,9 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<link href="css/style.css" rel="stylesheet" type="text/css">
-		
+			
 		<script type="text/javascript" src="/webiopi.js"></script>
-	    <script type="text/javascript" src="scripts/report.js"></script>
+	    <script type="text/javascript" src="scripts/report.js"></script>	    
 	
 	</head>
 
@@ -34,10 +34,10 @@
 				<div id="navigationwrap">
 					<div id="navigation" align="center">
 						<a href="index.html" class="menuButton">Home</a>
-						<a href="configurations.html" class="menuButton">Configurazioni</a>
-						<a href="devices.html" class="menuButton">Dispositivi</a>
+<!--						<a href="configurations.html" class="menuButton">Configurazioni</a>
+						<a href="devices.html" class="menuButton">Dispositivi</a> -->
 						<a href="sensors.html" class="menuButton">Sensori</a>
-						<a href="timers.html" class="menuButton">Timer</a>
+<!--						<a href="timers.html" class="menuButton">Timer</a> -->
 					</div>
 				</div>
 			</nav>
@@ -66,6 +66,12 @@
 							    		<button class="downSwitch" onmousedown="brightLed('led1Down')" onmouseup="darkLed('led1Down')"><span class="iconicfill-arrow-down"> </span></button>
 							  		</div>
 							  		<div id="led1Down" class="led-black"> </div>
+								</div>
+							</td>
+							<td>
+								<div id="luminosity"> </div>
+								<div class="progress-bar">
+    								<span> </span>
 								</div>
 							</td>
 						</table>
